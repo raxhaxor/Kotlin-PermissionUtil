@@ -41,7 +41,8 @@ fun Array<String>.withPermissions(
                 runnable = null
             }
             if (count > maxCount) {
-                discardBody?.invoke()
+                val mainHandler = Handler(Looper.getMainLooper())
+                mainHandler.post { discardBody?.invoke() }
                 handler.removeCallbacksAndMessages(null)
                 runnable = null
             }
